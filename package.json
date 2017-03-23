@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/zacck/async-js-.git",
   "author": "zacck <coderv63@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "request": "2.60.0"
+  }
 }
