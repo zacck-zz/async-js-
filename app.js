@@ -14,18 +14,13 @@ var argv =  require('yargs')
   })
   .help('help')
   .argv;
+var command= argv._[0];
 
 
 
-weather(function(currentWeather) {
-  console.log(currentWeather);
-});
 
-location(function(location) {
-  if(!location) {
-    //take care of issue
-    console.log('unable for find location');
-    return;
-  }
-  console.log(`city: ${location.city}, long/lat: ${location.loc}`)
-})
+if(command === 'get') {
+  weather(argv.location, function(currentWeather) {
+    console.log(currentWeather);
+  });
+}
