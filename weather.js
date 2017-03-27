@@ -3,7 +3,6 @@ const key = 'b3c17071c6f0bf5ed04f42571244404a';
 var loc = require('./location.js');
 var baseUrl = `http://api.openweathermap.org/data/2.5/weather?`
 module.exports = function(location = '', callback) {
-  console.log('Got Weather!');
   var authU = `${baseUrl}APPID=${key}`;
   var units = 'metric'
   var unitUrl = `${authU}&units=${units}`
@@ -28,7 +27,7 @@ module.exports = function(location = '', callback) {
   }
 
   if(location.length > 0) {
-    console.log('Location provided Checking >>>');
+    console.log(`Checking Weather for ${location} >>>`);
     city = location
     cityUrl = `${unitUrl}&q=${city}`;
     weatherGetter();
