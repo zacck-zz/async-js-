@@ -1,3 +1,5 @@
+var weather = require('../weather.js')
+
 function doWork(data, callback) {
   //do some work
   callback('done');
@@ -15,9 +17,38 @@ function doWorkPromise(data) {
   });
 }
 
-//call the promise
-doWorkPromise('some data').then((data) => {
-  console.log(data);
-}, (err) => {
-  console.log(err.message)
-});
+// //call the promise
+// doWorkPromise('some data').then((data) => {
+//   console.log(data);
+// }, (err) => {
+//   console.log(err.message)
+// });
+
+
+function getWeather(location) {
+  return new Promise((resolve, reject) => {
+    if(location != undefined) {
+      weather(location, function(currentWeather) {
+        resolve(currentWeather);
+      });
+    } else {
+      reject('location not provided');
+    }
+  })
+}
+
+
+//lets make a  weather getter function
+const weatherGetter =  (weather) => {
+  //call out promise
+  getWeather(weather).then((data) => {
+    console.log(data);
+  }, (err) => {
+    console.log('Error Occured'err);
+  });
+}
+
+
+//trigger weather getter
+weatherGetter();
+weatherGetter('CapeTown')
