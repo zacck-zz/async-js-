@@ -16,9 +16,6 @@ var argv =  require('yargs')
   .argv;
 var command= argv._[0];
 
-
-
-
 if(command === 'get') {
   weather(argv.location, function(currentWeather) {
     console.log(currentWeather);

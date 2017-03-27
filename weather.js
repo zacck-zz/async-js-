@@ -28,11 +28,14 @@ module.exports = function(location = '', callback) {
   }
 
   if(location.length > 0) {
+    console.log('Location provided Checking >>>');
     city = location
     cityUrl = `${unitUrl}&q=${city}`;
     weatherGetter();
   } else {
+    console.log('Finding Location >>')
     loc((location) => {
+      console.log(`Checking Weather for ${location.city} >>>`)
       city = location.city;
       cityUrl = `${unitUrl}&q=${city}`;
       weatherGetter();
