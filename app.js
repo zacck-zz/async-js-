@@ -1,5 +1,4 @@
 var weather = require('./weather.js')
-var location = require('./location.js')
 //set up arguments we want
 var argv =  require('yargs')
   .command('get', 'get the weather', (yargs) => {
@@ -17,7 +16,5 @@ var argv =  require('yargs')
 var command= argv._[0];
 
 if(command === 'get') {
-  weather(argv.location, function(currentWeather) {
-    console.log(currentWeather);
-  });
+  weather(argv.location)
 }
