@@ -1,7 +1,7 @@
 function doWork(shouldFail) {
   return new  Promise(function(resolve, reject) {
     if(shouldFail) {
-      reject
+      reject();
     }
     setTimeout(() => {
       console.log('done');

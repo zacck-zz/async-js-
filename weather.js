@@ -33,11 +33,15 @@ module.exports = function(location = '', callback) {
     weatherGetter();
   } else {
     console.log('Finding Location >>')
-    loc((location) => {
-      console.log(`Checking Weather for ${location.city} >>>`)
-      city = location.city;
+    //lets call location
+    loc().then((data) => {
+      console.log(`Checking Weather for ${data.city} >>>`);
+      city = data.city;
       cityUrl = `${unitUrl}&q=${city}`;
       weatherGetter();
-    })
+    }, (locationErr) => {
+      //incase our promise rejects
+      console.log(`Error ${locationErr} occured`);
+    });
   }
 }
