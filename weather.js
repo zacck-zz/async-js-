@@ -46,6 +46,7 @@ module.exports = (location = '') => {
        if(error) {
          reject(`error.message, occured`)
        } else {
+         const updated = new Date(body.dt *1000).toString();
          const name  = body.name;
          const weather = body.weather[0].description;
          const high = body.main.temp_max;
@@ -53,7 +54,9 @@ module.exports = (location = '') => {
          //console.log(JSON.stringify(body, null, 4))
          const windKms = Math.round(body.wind.speed * 3.6);
          const dir = getDir(body.wind.deg);
+         console.log(` Last updated at ${updated}`)
          if(windKms < 34) {
+
            console.log(` Winds are ok for Surfing`);
          }
          resolve(`\n ${name} weather today is ${weather}  \n Highs of ${high} celcius and lows of ${low} celcius  \n Wind: \n Speed -> ${windKms} km/h, Direction: -> ${dir} \n`)
@@ -64,17 +67,17 @@ module.exports = (location = '') => {
   }
 
   if(location.length > 0) {
-    console.log(`Checking Weather for ${location} >>>`);
+    console.log(` Checking Weather for ${location} >>>`);
     city = location
     cityUrl = `${unitUrl}&q=${city}`;
     weatherGetter().then((data) => {
       console.log(data);
     });
   } else {
-    console.log('Finding Location >>')
+    console.log(' Finding Location >>')
     //lets call location
     loc().then((data) => {
-      console.log(`Checking Weather for ${data.city} >>>`);
+      console.log(` Checking Weather for ${data.city} >>>`);
       city = data.city;
       cityUrl = `${unitUrl}&q=${city}`;
       weatherGetter().then((data) => {
