@@ -22,7 +22,11 @@ module.exports = (location = '') => {
          const high = body.main.temp_max;
          const low = body.main.temp_min;
          //console.log(JSON.stringify(body, null, 4))
-         resolve(`${name} weather today is ${weather} with highs of ${high} celcius and lows of ${low} celcius`)
+         const windKms = body.wind.speed * 3.6
+         if(windKms < 34) {
+           console.log(` Winds are ok for Surfing`);
+         }
+         resolve(`\n ${name} weather today is ${weather}  \n Highs of ${high} celcius and lows of ${low} celcius  \n Wind: speed -> ${windKms} km/h \n`)
        }
      });
     });
@@ -33,7 +37,9 @@ module.exports = (location = '') => {
     console.log(`Checking Weather for ${location} >>>`);
     city = location
     cityUrl = `${unitUrl}&q=${city}`;
-    weatherGetter();
+    weatherGetter().then((data) => {
+      console.log(data);
+    });
   } else {
     console.log('Finding Location >>')
     //lets call location
@@ -43,6 +49,8 @@ module.exports = (location = '') => {
       cityUrl = `${unitUrl}&q=${city}`;
       weatherGetter().then((data) => {
         console.log(data);
+      },(err) => {
+        console.log(err);
       })
     }, (locationErr) => {
       //incase our promise rejects
