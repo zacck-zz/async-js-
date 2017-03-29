@@ -18,7 +18,7 @@ module.exports = (location = '') => {
          reject(`error.message, occured`)
        } else {
          const name  = body.name;
-         const weather = body.weather[0].main;
+         const weather = body.weather[0].description;
          const high = body.main.temp_max;
          const low = body.main.temp_min;
          //console.log(JSON.stringify(body, null, 4))
