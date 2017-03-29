@@ -9,6 +9,8 @@ module.exports = (location = '') => {
   var city;
   var cityUrl;
 
+
+  //TODO convert to switch
   const getDir = (angle) => {
     //easy to customize by changing the number of directions you have
         var directions = 8;
@@ -49,12 +51,12 @@ module.exports = (location = '') => {
          const high = body.main.temp_max;
          const low = body.main.temp_min;
          //console.log(JSON.stringify(body, null, 4))
-         const windKms = body.wind.speed * 3.6;
+         const windKms = Math.round(body.wind.speed * 3.6);
          const dir = getDir(body.wind.deg);
          if(windKms < 34) {
            console.log(` Winds are ok for Surfing`);
          }
-         resolve(`\n ${name} weather today is ${weather}  \n Highs of ${high} celcius and lows of ${low} celcius  \n Wind \n speed -> ${windKms} km/h, Direction: -> ${dir} \n`)
+         resolve(`\n ${name} weather today is ${weather}  \n Highs of ${high} celcius and lows of ${low} celcius  \n Wind: \n Speed -> ${windKms} km/h, Direction: -> ${dir} \n`)
        }
      });
     });
